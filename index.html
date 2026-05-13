@@ -375,6 +375,59 @@ section{padding:110px 5%}
   box-shadow:0 6px 20px rgba(0,229,255,.15);
 }
 
+/* ===== MOBILE  ===== */
+@media (max-width: 768px){
+
+  #hero{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:40px;
+  }
+
+  .hero-left{
+    align-items:center;
+  }
+
+  .hero-desc{
+    max-width:100%;
+  }
+
+  .hero-ctas{
+    justify-content:center;
+  }
+
+  .hero-right{
+    width:100%;
+    overflow:visible;
+  }
+
+  .card-scene{
+    width:100%;
+    max-width:320px;
+    height:340px;
+    margin:auto;
+  }
+
+  .float-card{
+    width:240px;
+    padding:28px 20px;
+  }
+
+  .spin-ring{
+    width:280px;
+    height:280px;
+  }
+
+  .glow-orb{
+    width:240px;
+    height:240px;
+  }
+
+  .hero-name{
+    font-size:56px;
+  }
+}
+
 /* ===== EXPERIENCE ===== */
 #experience{background:var(--bg);transition:var(--transition-theme)}
 .timeline{position:relative;padding-left:40px}
