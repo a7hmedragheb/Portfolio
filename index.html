@@ -704,11 +704,11 @@ footer span{color:var(--pink)}
 }
 @media(max-width:900px){
   #hero{grid-template-columns:1fr;text-align:center}
-  .hero-left{align-items:center}
+  .hero-left{align-items:center;order:2}
+  .hero-right{display:flex;justify-content:center;order:1;margin-top:0;margin-bottom:32px}
   .hero-desc{margin:0 auto}
   .hero-ctas{justify-content:center}
   .avail-tag{margin:0 auto}
-  .hero-right{display:flex;justify-content:center;margin-top:40px}
   .card-scene{width:240px;height:290px}
   .float-card{width:200px;padding:24px 18px}
   .glow-orb{width:200px;height:200px}
@@ -728,7 +728,7 @@ footer span{color:var(--pink)}
 @media(max-width:600px){
   section{padding:80px 5%}
   #hero{padding-top:100px;gap:32px}
-  .hero-right{margin-top:24px}
+  .hero-right{margin-top:0;margin-bottom:20px}
   .card-scene{width:200px;height:240px}
   .float-card{width:170px;padding:18px 14px}
   .glow-orb{width:160px;height:160px}
