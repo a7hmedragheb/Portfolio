@@ -512,9 +512,63 @@ section{padding:110px 5%}
 
 /* ===== CONTACT ===== */
 #contact{background:var(--bg2);transition:var(--transition-theme)}
-.contact-centered{
-  max-width:620px;margin:0 auto;
+/* Contact split layout */
+.contact-split-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+.contact-cards-col{
   display:flex;flex-direction:column;gap:14px;
+}
+.contact-photo-col{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:28px;
+}
+.contact-avatar-wrap-new{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  width:220px;height:220px;
+}
+.contact-photo-big{
+  width:160px;height:160px;border-radius:50%;
+  overflow:hidden;z-index:2;position:relative;
+  border:3px solid rgba(255,45,120,.5);
+  box-shadow:0 0 40px rgba(255,45,120,.35),0 0 0 6px rgba(255,45,120,.1);
+  transition:transform .4s,box-shadow .4s;
+}
+.contact-photo-big:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 60px rgba(255,45,120,.5),0 0 0 10px rgba(255,45,120,.15);
+}
+.contact-photo-big img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;display:block;
+}
+.ripple-new{
+  position:absolute;border-radius:50%;
+  border:1.5px solid rgba(91,63,207,.4);
+  animation:rippleOut 3s ease-out infinite;
+}
+.ripple-new:nth-child(1){width:100%;height:100%;animation-delay:0s}
+.ripple-new:nth-child(2){width:135%;height:135%;animation-delay:.9s}
+.ripple-new:nth-child(3){width:170%;height:170%;animation-delay:1.8s}
+.contact-tagline-new{
+  font-size:15px;color:var(--text2);text-align:center;
+  line-height:1.7;font-weight:400;
+}
+.contact-tagline-new strong{color:var(--cyan);font-weight:700}
+.contact-avail-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 20px;border-radius:100px;
+  background:rgba(0,229,255,.08);
+  border:1px solid rgba(0,229,255,.25);
+  font-size:13px;color:var(--cyan);font-weight:600;
+}
+.contact-avail-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--cyan);
+  animation:pulse 1.5s infinite;
 }
 
 /* Contact cards */
@@ -598,7 +652,7 @@ a.contact-card{text-decoration:none;color:inherit;}
 @keyframes statusPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,229,255,.3)}50%{box-shadow:0 0 8px 2px rgba(0,229,255,.15)}}
 
 /* Unused old elements hidden */
-.contact-avatar-wrap,.ripple,.contact-tagline,.contact-grid,.contact-layout{display:none!important}
+.contact-avatar-wrap,.contact-grid,.contact-layout{display:none!important}
 
 /* ===== SECTION AMBIENT CANVAS ===== */
 .section-canvas{
@@ -612,7 +666,7 @@ a.contact-card{text-decoration:none;color:inherit;}
 #skills,#projects,#contact{position:relative;overflow:hidden}
 #skills .section-header,#skills .skills-category-grid,
 #projects .section-header,#projects .projects-grid,
-#contact .section-header,#contact .contact-centered{position:relative;z-index:1}
+#contact .section-header,#contact .contact-split-layout{position:relative;z-index:1}
 
 /* Floating orb glows behind sections */
 .ambient-orb{
@@ -668,6 +722,8 @@ footer span{color:var(--pink)}
   .projects-grid{grid-template-columns:1fr 1fr}
   .edu-lang-grid{grid-template-columns:1fr}
   .social-grid{grid-template-columns:1fr}
+  .contact-split-layout{grid-template-columns:1fr}
+  .contact-photo-col{margin-top:40px}
 }
 @media(max-width:600px){
   section{padding:80px 5%}
@@ -817,7 +873,26 @@ footer span{color:var(--pink)}
     <h2 class="section-title">Get In <span>Touch</span></h2>
   </div>
   <div class="section-canvas"><canvas class="sec-canvas"></canvas></div>
-  <div class="contact-centered" id="contactStack"></div>
+  <div class="contact-split-layout">
+    <div class="contact-cards-col" id="contactStack"></div>
+    <div class="contact-photo-col reveal from-right">
+      <div class="contact-avatar-wrap-new">
+        <div class="ripple-new"></div>
+        <div class="ripple-new"></div>
+        <div class="ripple-new"></div>
+        <div class="contact-photo-big">
+          <img id="contactPhotoImg" src="" alt="Ahmed Ragheb"/>
+        </div>
+      </div>
+      <div class="contact-tagline-new">
+        Let's build something <strong>amazing</strong> together.<br/>
+        Open to <strong>backend</strong> &amp; <strong>full-stack</strong> opportunities.
+      </div>
+      <span class="contact-avail-badge">
+        <span class="contact-avail-dot"></span>Available for hire
+      </span>
+    </div>
+  </div>
 </section>
 </main>
 
@@ -1130,6 +1205,13 @@ drawParticles();
 
 /* ===== LOADER ===== */
 setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 2200);
+
+// Copy hero photo to contact section
+window.addEventListener('DOMContentLoaded', () => {
+  const hero = document.querySelector('.photo-avatar img');
+  const cPhoto = document.getElementById('contactPhotoImg');
+  if (hero && cPhoto) cPhoto.src = hero.src;
+});
 
 /* ===== NAV TOGGLE ===== */
 document.getElementById('navToggle').addEventListener('click', () => {
